@@ -130,13 +130,21 @@ public class AutoFill extends JPanel implements ActionListener, NativeKeyListene
     }
     public static void main(String args[]) 
     {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {}
         SwingUtilities.invokeLater(new Runnable() 
         {
             public void run() 
             {
                 JFrame fr = new JFrame("Autofill: www.irctc.co.in");
                 AutoFill obj = new AutoFill();
-                fr.setSize(600, 300);
+                fr.setSize(600, 350);
                 fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 fr.setLocationRelativeTo(null);
                 fr.setResizable(false);
